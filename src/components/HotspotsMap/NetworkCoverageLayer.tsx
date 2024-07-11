@@ -21,22 +21,23 @@ export function NetworkCoverageLayer({
   const { resolvedTheme } = useTheme()
   return (
     <Fragment {...props}>
+      {/* new url: http://localhost:8080/data/miners/{z}/{x}/{y}.pbf */}
       <Source
         id="points_source"
         type="vector"
-        url={`${sourceDomain}/${points.sourcePath}`}
+        url="http://localhost:8080/data/miners.json"
       >
         <Layer
           id="points_layer"
           type="circle"
-          source-layer={points.sourceLayer}
-          maxzoom={MIN_HEXES_ZOOM + POINTS_AND_HEXES_OVERLAP}
+          source-layer="miners"
+          maxzoom={24}
           paint={getBlurredPointStyle(color)}
         />
         <Layer
           id="hotspot_count_labels"
           type="symbol"
-          source-layer={points.sourceLayer}
+          source-layer="miners"
           minzoom={MIN_HEX_LABELS_ZOOM}
           layout={hexLabelLayout}
           paint={getHexLabelStyle(resolvedTheme)}
@@ -45,12 +46,12 @@ export function NetworkCoverageLayer({
       <Source
         id="hexes_source"
         type="vector"
-        url={`${sourceDomain}/${hexes.sourcePath}`}
+        url="http://localhost:8080/data/hex_grid.json"
       >
         <Layer
           id="hexes_layer"
           type="fill"
-          source-layer={hexes.sourceLayer}
+          source-layer="hex_grid"
           paint={getHexFillStyle(color)}
           minzoom={MIN_HEXES_ZOOM}
         />

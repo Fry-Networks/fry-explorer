@@ -1,0 +1,39 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [37.76,-122.45]
+            ]
+          ]
+        },
+        "properties": {
+          "id": 1,
+          "name": "SF Hex"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-74.02, 40.70],
+              [-74.00, 40.70],
+              [-74.00, 40.72],
+              [-74.02, 40.72],
+              [-74.02, 40.70]
+            ]
+          ]
+        },
+        "properties": {
+          "id": 2,
+          "name": "NY Hex"
+        }
+      }
+    ]
+  }

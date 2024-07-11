@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Helium Hotspots Map",
+  title: "Fry Miners Map",
 }
 
 export default function Page() {

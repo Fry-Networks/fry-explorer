@@ -34,9 +34,9 @@ export const metadata = {
   openGraph: {
     title: "Fry Explorer",
     description:
-      "Helium Explorer is an open source network explorer for the Helium network",
-    url: "https://explorer.helium.com",
-    siteName: "Helium Explorer",
+      "The Fry Explorer is a tool to visualize the Fry network and its miners.",
+    url: "https://explorer.frynetworks.com",
+    siteName: "Fry Explorer",
     images: [
       {
         url: "/og.png",
@@ -56,20 +56,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head>
-        <link
-          rel="preconnect"
-          href="https://pmtiles.heliumfoundation.wtf/"
-          crossOrigin=""
-        />
-        <link rel="dns-prefetch" href="https://pmtiles.heliumfoundation.wtf/" />
-        <link
-          rel="preconnect"
-          href="https://mt.hotspotty.org/"
-          crossOrigin=""
-        />
-        <link rel="dns-prefetch" href="https://mt.hotspotty.org/" />
-      </Head>
       <body className="absolute inset-0 bg-zinc-50 dark:bg-black">
         <Providers>
           <GAScript />
