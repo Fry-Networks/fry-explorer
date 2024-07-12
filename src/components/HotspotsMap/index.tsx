@@ -118,6 +118,7 @@ export function HotspotsMap({ children }: { children: React.ReactNode }) {
   const onClick = useCallback(
     (event: MapLayerMouseEvent) => {
       event.features?.forEach(({ layer, properties }) => {
+        console.log(layer, properties)
         if (layer.id !== "hexes_layer" || !properties?.id) return
         if (selectedHex?.hexId === properties.id) {
           router.push("/")

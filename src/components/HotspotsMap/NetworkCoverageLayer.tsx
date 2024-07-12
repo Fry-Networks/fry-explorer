@@ -52,6 +52,7 @@ export function NetworkCoverageLayer({
           id="hexes_layer"
           type="fill"
           source-layer="hex_grid"
+          
           paint={getHexFillStyle(color)}
           minzoom={MIN_HEXES_ZOOM}
         />
