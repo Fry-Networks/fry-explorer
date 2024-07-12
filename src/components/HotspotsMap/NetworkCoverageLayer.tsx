@@ -13,10 +13,8 @@ import {
 } from "./utils"
 
 export function NetworkCoverageLayer({
-  layer: { color, sourceDomain, points, hexes },
   ...props
 }: {
-  layer: NetworkCoverageLayerOption
 }) {
   const { resolvedTheme } = useTheme()
   return (
@@ -32,7 +30,7 @@ export function NetworkCoverageLayer({
           type="circle"
           source-layer="miners"
           maxzoom={24}
-          paint={getBlurredPointStyle(color)}
+          paint={getBlurredPointStyle('#dc2626')}
         />
         <Layer
           id="hotspot_count_labels"
@@ -53,7 +51,7 @@ export function NetworkCoverageLayer({
           type="fill"
           source-layer="hex_grid"
           
-          paint={getHexFillStyle(color)}
+          paint={getHexFillStyle('#dc2626')}
           minzoom={MIN_HEXES_ZOOM}
         />
       </Source>

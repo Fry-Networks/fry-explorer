@@ -33,7 +33,6 @@ import {
   MIN_MAP_ZOOM,
   ZOOM_BY_HEX_RESOLUTION,
   getHexOutlineStyle,
-  networkLayers,
 } from "./utils"
 
 export function HotspotsMap({ children }: { children: React.ReactNode }) {
@@ -160,7 +159,7 @@ export function HotspotsMap({ children }: { children: React.ReactNode }) {
       {children}
 
       {segment !== "mobile" && (
-        <NetworkCoverageLayer layer={networkLayers.iot} />
+        <NetworkCoverageLayer/>
       )}
 
       {selectedHex && (

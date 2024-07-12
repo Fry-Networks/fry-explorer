@@ -1,6 +1,6 @@
 {
-  "short_name": "Helium Explorer",
-  "name": "Helium Explorer is an open source block explorer providing detailed blockchain data from the Helium network",
+  "short_name": "Fry Explorer",
+  "name": "Fry Explorer is the officiel explorer for the FRY Network",
   "icons": [
     {
       "src": "favicon.ico",

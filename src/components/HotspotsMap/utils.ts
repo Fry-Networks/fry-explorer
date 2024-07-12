@@ -26,8 +26,7 @@ export const MIN_HEXES_ZOOM = 7
 export const MIN_HEX_LABELS_ZOOM = 11
 export const POINTS_AND_HEXES_OVERLAP = 2
 
-export const HELIUM_IOT_COLOR = "#27EE76"
-export const HELIUM_MOBILE_COLOR = "#009FF9"
+export const FRY_COLOR = "#dc2626"
 
 export const getHexFillStyle = (color: string): mapboxgl.FillPaint => ({
   "fill-color": color,
@@ -41,21 +40,29 @@ export const getBlurredPointStyle = (color: string): mapboxgl.CirclePaint => ({
     ["exponential", 2],
     ["zoom"],
     MIN_MAP_ZOOM,
-    0.05,
+    0.3,  // Increased from 0.05 for better visibility
     MIN_HEXES_ZOOM + POINTS_AND_HEXES_OVERLAP,
-    0.4,
+    0.6,  // Increased from 0.4 for better visibility
   ],
   "circle-radius": [
     "interpolate",
     ["exponential", 2],
     ["zoom"],
     MIN_MAP_ZOOM,
-    3,
+    6,  // Increased from 3 for larger points when zoomed out
     MIN_HEXES_ZOOM + POINTS_AND_HEXES_OVERLAP,
-    2,
+    3,  // Slightly increased from 2 for better visibility
+  ],
+  "circle-blur": [
+    "interpolate",
+    ["linear"],
+    ["zoom"],
+    MIN_MAP_ZOOM,
+    0.5,  // Added blur effect for softer appearance when zoomed out
+    MIN_HEXES_ZOOM + POINTS_AND_HEXES_OVERLAP,
+    0,    // No blur when zoomed in
   ],
 })
-
 export const getHexOutlineStyle = (
   theme: string | undefined
 ): mapboxgl.LinePaint => ({
@@ -104,35 +111,3 @@ export interface NetworkCoverageLayerOption {
   points: LayerConfig
   hexes: LayerConfig
 }
-
-export const networkLayers: { [network: string]: NetworkCoverageLayerOption } =
-  {
-    mobile: {
-      name: "MOBILE",
-      icon: HeliumMobileIcon,
-      color: HELIUM_MOBILE_COLOR,
-      sourceDomain: process.env.NEXT_PUBLIC_HOTSPOTTY_TILESERVER_URL!,
-      points: {
-        sourcePath: "public.helium_mobile_points.json",
-        sourceLayer: "public.helium_mobile_points",
-      },
-      hexes: {
-        sourcePath: "public.helium_mobile_hexes.json",
-        sourceLayer: "public.helium_mobile_hexes",
-      },
-    },
-    iot: {
-      name: "IOT",
-      icon: HeliumIotIcon,
-      color: HELIUM_IOT_COLOR,
-      sourceDomain: process.env.NEXT_PUBLIC_HOTSPOTTY_TILESERVER_URL!,
-      points: {
-        sourcePath: "public.helium_iot_points.json",
-        sourceLayer: "public.helium_iot_points",
-      },
-      hexes: {
-        sourcePath: "public.helium_iot_hexes.json",
-        sourceLayer: "public.helium_iot_hexes",
-      },
-    },
-  }

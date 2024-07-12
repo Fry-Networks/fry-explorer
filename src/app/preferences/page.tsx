@@ -1,9 +1,6 @@
-import { PreferencesProvider } from "@/context/usePreferences"
 import { XMarkIcon } from "@heroicons/react/24/outline"
 import clsx from "clsx"
 import Link from "next/link"
-import { ExitButton } from "./components/ExitButton"
-import { ProviderList } from "./components/ProviderList"
 import { ConditionalThemeToggle, ThemeToggle } from "./components/ThemeToggle"
 
 export default function Page() {
@@ -28,23 +25,15 @@ export default function Page() {
             <XMarkIcon className="h-6 w-6 text-zinc-500 transition hover:text-zinc-700 dark:text-zinc-400 hover:dark:text-zinc-100" />
           </Link>
         </div>
-        <PreferencesProvider>
-          <div className="py-4">
+        <div className="py-4">
+          <ConditionalThemeToggle>
             <div>
-              <h2 className="text-sm">Hotspot Analytics Provider</h2>
-              <ProviderList />
+              <h2 className="text-sm">Theme</h2>
+              <ThemeToggle />
             </div>
-            <ConditionalThemeToggle>
-              <div>
-                <h2 className="text-sm">Theme</h2>
-                <ThemeToggle />
-              </div>
-            </ConditionalThemeToggle>
-          </div>
-          <div className="flex justify-end gap-4">
-            <ExitButton />
-          </div>
-        </PreferencesProvider>
+          </ConditionalThemeToggle>
+        </div>
+
       </div>
     </div>
   )
