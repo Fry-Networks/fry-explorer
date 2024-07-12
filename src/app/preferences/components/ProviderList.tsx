@@ -72,7 +72,7 @@ export const ProviderList = () => {
               aria-label="Select Hotspotty"
               className={clsx(
                 "group my-2 flex w-full gap-2 rounded border p-2",
-                active ? "border-blue-500 dark:border-blue-400" : "border"
+                active ? "border-red-500 dark:border-red-400" : "border"
               )}
               onClick={() => {
                 localStorage.setItem(PROVIDER_KEY, label)
@@ -82,7 +82,7 @@ export const ProviderList = () => {
               {Icon}
               <p
                 className={clsx(
-                  "transition group-hover:text-blue-500 dark:group-hover:text-blue-400"
+                  "transition group-hover:text-red-500 dark:group-hover:text-red-400"
                 )}
               >
                 {label}

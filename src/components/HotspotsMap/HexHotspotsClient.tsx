@@ -32,7 +32,7 @@ export function HexHotspotsClient({ miners }: { miners: Miner[] }) {
             <div className="text-sm font-medium text-gray-900 dark:text-zinc-200">{miner.nickname || miner.name}</div>
             <div className="text-xs text-gray-500 dark:text-zinc-400">{miner.hexId}</div>
           </div>
-          <button onClick={() => setOpenModal(miner._id)} className="text-blue-500">Infos</button>
+          <button onClick={() => setOpenModal(miner._id)} className="text-red-500">Infos</button>
 
           <Dialog
             open={openModal === miner._id}

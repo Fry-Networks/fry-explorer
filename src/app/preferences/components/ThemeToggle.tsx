@@ -19,16 +19,16 @@ export const ThemeToggle = () => {
       >
         <p
           className={clsx(
-            "transition group-hover:text-blue-500 dark:group-hover:text-blue-400",
-            theme === "light" ? "text-blue-500 dark:text-blue-400" : ""
+            "transition group-hover:text-red-500 dark:group-hover:text-red-400",
+            theme === "light" ? "text-red-500 dark:text-red-400" : ""
           )}
         >
           Light
         </p>
         <SunIcon
           className={clsx(
-            "h-6 w-6 transition group-hover:stroke-blue-500 dark:group-hover:stroke-blue-400",
-            theme === "light" ? "text-blue-500 dark:text-blue-400" : ""
+            "h-6 w-6 transition group-hover:stroke-red-500 dark:group-hover:stroke-red-400",
+            theme === "light" ? "text-red-500 dark:text-red-400" : ""
           )}
         />
       </button>
@@ -41,16 +41,16 @@ export const ThemeToggle = () => {
       >
         <p
           className={clsx(
-            "transition group-hover:text-blue-500 dark:text-blue-400 dark:group-hover:text-blue-400",
-            theme === "dark" ? "text-blue-500 dark:text-blue-400" : ""
+            "transition group-hover:text-red-500 dark:text-red-400 dark:group-hover:text-red-400",
+            theme === "dark" ? "text-red-500 dark:text-red-400" : ""
           )}
         >
           Dark
         </p>
         <MoonIcon
           className={clsx(
-            "h-6 w-6 transition group-hover:stroke-blue-500 dark:group-hover:stroke-blue-400",
-            theme === "dark" ? "text-blue-500 dark:text-blue-400" : ""
+            "h-6 w-6 transition group-hover:stroke-red-500 dark:group-hover:stroke-red-400",
+            theme === "dark" ? "text-red-500 dark:text-red-400" : ""
           )}
         />
       </button>
