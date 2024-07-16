@@ -1,6 +1,5 @@
 import { CoordPair } from "h3-js"
 import { HeliumIotIcon } from "../icons/HeliumIotIcon"
-import { HeliumMobileIcon } from "../icons/HeliumMobileIcon"
 
 export const MIN_MAP_ZOOM = 2
 export const MAX_MAP_ZOOM = 14
@@ -40,27 +39,27 @@ export const getBlurredPointStyle = (color: string): mapboxgl.CirclePaint => ({
     ["exponential", 2],
     ["zoom"],
     MIN_MAP_ZOOM,
-    0.3,  // Increased from 0.05 for better visibility
+    0.3, // Increased from 0.05 for better visibility
     MIN_HEXES_ZOOM + POINTS_AND_HEXES_OVERLAP,
-    0.6,  // Increased from 0.4 for better visibility
+    0.6, // Increased from 0.4 for better visibility
   ],
   "circle-radius": [
     "interpolate",
     ["exponential", 2],
     ["zoom"],
     MIN_MAP_ZOOM,
-    6,  // Increased from 3 for larger points when zoomed out
+    6, // Increased from 3 for larger points when zoomed out
     MIN_HEXES_ZOOM + POINTS_AND_HEXES_OVERLAP,
-    3,  // Slightly increased from 2 for better visibility
+    3, // Slightly increased from 2 for better visibility
   ],
   "circle-blur": [
     "interpolate",
     ["linear"],
     ["zoom"],
     MIN_MAP_ZOOM,
-    0.5,  // Added blur effect for softer appearance when zoomed out
+    0.5, // Added blur effect for softer appearance when zoomed out
     MIN_HEXES_ZOOM + POINTS_AND_HEXES_OVERLAP,
-    0,    // No blur when zoomed in
+    0, // No blur when zoomed in
   ],
 })
 export const getHexOutlineStyle = (

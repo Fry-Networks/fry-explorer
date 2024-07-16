@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation"
 import { Fragment, useCallback, useState } from "react"
 import { useDebouncedCallback } from "use-debounce"
 import { HeliumIotIcon } from "../icons/HeliumIotIcon"
-import { HeliumMobileIcon } from "../icons/HeliumMobileIcon"
 import { LoadingIcon } from "../icons/LoadingIcon"
 
 let controller: AbortController | null = null
@@ -163,10 +162,7 @@ export function HotspotSearch() {
                           {searchResults
                             .slice(0, RESULTS_LIMIT)
                             .map((hotspot) => {
-                              const Avatar =
-                                hotspot.cell_count > 0
-                                  ? HeliumMobileIcon
-                                  : HeliumIotIcon
+                              const Avatar = HeliumIotIcon
                               return (
                                 <Combobox.Option
                                   key={hotspot.hotspot_id}
