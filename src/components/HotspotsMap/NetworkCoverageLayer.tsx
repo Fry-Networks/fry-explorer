@@ -17,13 +17,14 @@ export function NetworkCoverageLayer({
 }: {
 }) {
   const { resolvedTheme } = useTheme()
+  const port = 3018
   return (
     <Fragment {...props}>
       {/* new url: http://localhost:8080/data/miners/{z}/{x}/{y}.pbf */}
       <Source
         id="points_source"
         type="vector"
-        url="http://localhost:8080/data/miners.json"
+        url={`http://localhost:${port}/data/miners.json`}
       >
         <Layer
           id="points_layer"
@@ -44,7 +45,7 @@ export function NetworkCoverageLayer({
       <Source
         id="hexes_source"
         type="vector"
-        url="http://localhost:8080/data/hex_grid.json"
+        url={`http://localhost:${port}/data/hex_grid.json`}
       >
         <Layer
           id="hexes_layer"

@@ -39,9 +39,11 @@ export function Header() {
             <DesktopNavigation className="pointer-events-auto hidden md:block" />
           </div>
           <div className="flex justify-end gap-4 md:flex-1">
+            {/*
             <div className="pointer-events-auto">
               <HotspotSearch />
             </div>
+*/}
             <div className="pointer-events-auto py-2 sm:block">
               <Link
                 href="/preferences"
@@ -51,6 +53,7 @@ export function Header() {
                 <Cog6ToothIcon className="h-6 w-6 stroke-zinc-500 transition group-hover:stroke-zinc-700 dark:stroke-zinc-400 group-hover:dark:stroke-zinc-100" />
               </Link>
             </div>
+            {/*
             <div className="pointer-events-auto hidden py-2 sm:block">
               <Link
                 href="https://github.com/helium/network-explorer"
@@ -61,6 +64,7 @@ export function Header() {
                 <GitHubIcon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-700 dark:fill-zinc-400 group-hover:dark:fill-zinc-100" />
               </Link>
             </div>
+*/}
           </div>
         </div>
       </Container>
