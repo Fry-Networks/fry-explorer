@@ -24,6 +24,7 @@ import Map, {
 import { gaEvent } from "../GATracker"
 import { NetworkCoverageLayer } from "./NetworkCoverageLayer"
 import { mapLayersDark } from "./mapLayersDark"
+import { mapLayersDarkSimon } from "./mapLayersDarkSimon"
 import { mapLayersLight } from "./mapLayersLight"
 import {
   HexFeatureDetails,
@@ -59,7 +60,7 @@ export function HotspotsMap({ children }: { children: React.ReactNode }) {
       sources: {
         protomaps: {
           type: "vector",
-          tiles: [`${process.env.NEXT_PUBLIC_PMTILES_URL}/{z}/{x}/{y}.mvt`],
+          tiles: [`${process.env.NEXT_PUBLIC_PMTILES_URL}/{z}/{x}/{y}.pbf`],
         },
       },
       glyphs: "https://cdn.protomaps.com/fonts/pbf/{fontstack}/{range}.pbf",
@@ -158,9 +159,7 @@ export function HotspotsMap({ children }: { children: React.ReactNode }) {
       <NavigationControl position="bottom-left" showCompass={false} />
       {children}
 
-      {segment !== "mobile" && (
-        <NetworkCoverageLayer/>
-      )}
+      {segment !== "mobile" && <NetworkCoverageLayer />}
 
       {selectedHex && (
         <Source type="geojson" data={selectedHex.geojson}>
