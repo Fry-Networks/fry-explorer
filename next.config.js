@@ -55,6 +55,14 @@ const nextConfig = {
       },
     ]
   },
+  async rewrites() {
+    return [
+      {
+        source: "/world/:path*",
+        destination: "https://pmtiles.heliumfoundation.wtf/world/:path*",
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

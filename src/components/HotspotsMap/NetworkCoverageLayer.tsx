@@ -12,10 +12,7 @@ import {
   hexLabelLayout,
 } from "./utils"
 
-export function NetworkCoverageLayer({
-  ...props
-}: {
-}) {
+export function NetworkCoverageLayer({ ...props }: {}) {
   const { resolvedTheme } = useTheme()
   const port = 3018
   return (
@@ -24,14 +21,14 @@ export function NetworkCoverageLayer({
       <Source
         id="points_source"
         type="vector"
-        url={`http://localhost:${port}/data/miners.json`}
+        url={`${process.env.NEXT_PUBLIC_TILES_URL}/data/miners.json`}
       >
         <Layer
           id="points_layer"
           type="circle"
           source-layer="miners"
           maxzoom={24}
-          paint={getBlurredPointStyle('#dc2626')}
+          paint={getBlurredPointStyle("#dc2626")}
         />
         <Layer
           id="hotspot_count_labels"
@@ -45,14 +42,13 @@ export function NetworkCoverageLayer({
       <Source
         id="hexes_source"
         type="vector"
-        url={`http://localhost:${port}/data/hex_grid.json`}
+        url={`${process.env.NEXT_PUBLIC_TILES_URL}/data/hex_grid.json`}
       >
         <Layer
           id="hexes_layer"
           type="fill"
           source-layer="hex_grid"
-          
-          paint={getHexFillStyle('#dc2626')}
+          paint={getHexFillStyle("#dc2626")}
           minzoom={MIN_HEXES_ZOOM}
         />
       </Source>
