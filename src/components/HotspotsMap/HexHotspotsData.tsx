@@ -3,8 +3,9 @@ import { useEffect, useState } from "react"
 import { HexHotspotsClient, Miner } from "./HexHotspotsClient"
 
 async function getMiners(hexId: string) {
+  console.log(window.location.origin)
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/hexdata`,
+    `${window.location.origin}/api/hexdata`, // Construct the URL dynamically
     {
       method: "POST",
       headers: {
