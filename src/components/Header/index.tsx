@@ -3,7 +3,7 @@ import { Cog6ToothIcon } from "@heroicons/react/24/outline"
 import clsx from "clsx"
 import Link from "next/link"
 import { GitHubIcon } from "../icons/GithubIcon"
-import { HeliumIcon } from "../icons/HeliumIcon"
+import { FryIcon } from "../icons/FryIcon"
 import { DesktopNavigation } from "./DesktopNavigation"
 import { HotspotSearch } from "./HotspotSearch"
 import { MobileNavigation } from "./MobileNavigation"
@@ -17,7 +17,7 @@ function Logo({ className, ...props }: { className?: string }) {
       {...props}
     >
       <div className="group flex items-center gap-2">
-        <HeliumIcon className="h-7 w-7 fill-zinc-600 transition group-hover:fill-zinc-800 dark:fill-zinc-200 dark:group-hover:fill-zinc-100" />
+        <FryIcon className="h-7 w-7 fill-zinc-600 transition group-hover:fill-zinc-800 dark:fill-zinc-200 dark:group-hover:fill-zinc-100" />
         <div className="text-lg tracking-tight text-zinc-600 transition group-hover:text-zinc-700 dark:text-zinc-200 group-hover:dark:text-zinc-100 sm:text-xl">
           Fry Explorer
         </div>

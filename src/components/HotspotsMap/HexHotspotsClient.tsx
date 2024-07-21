@@ -24,7 +24,7 @@ export function HexHotspotsClient({ miners }: { miners: Miner[] | null }) {
   }
 
   return (
-    <div className="relative flex-1">
+    <div className="relative flex-1 overflow-y-auto">
       {miners.map((miner) => (
         <div
           key={miner._id}
