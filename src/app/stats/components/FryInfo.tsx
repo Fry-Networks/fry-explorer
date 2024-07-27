@@ -10,19 +10,33 @@ export default function FryInfo() {
     verified: 0,
     online: 0,
   })
-  useEffect(() => {
-    fetch(
-      `${window.location.origin}/api/stats`, // Construct the URL dynamically
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    ).then(async (response) => {
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        `${window.location.origin}/api/stats`, // Construct the URL dynamically
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       const { miners, located, verified, online } = await response.json()
       setData({ miners, located, verified, online })
-    })
+    } catch (error) {
+      console.error("Error fetching data:", error)
+    }
+  }
+
+  useEffect(() => {
+    fetchData() // Fetch data initially when component mounts
+
+    const interval = setInterval(() => {
+      fetchData() // Fetch data every 10 minutes
+    }, 10 * 60 * 1000)
+
+    return () => clearInterval(interval) // Cleanup interval on component unmount
   }, [])
 
   return (
