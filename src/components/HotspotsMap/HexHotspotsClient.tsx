@@ -79,17 +79,9 @@ export function HexHotspotsClient({ miners }: { miners: Miner[] | null }) {
                   </Title>
                   <Text className="text-gray-300">Hex ID: {miner.hexId}</Text>
                   <Text className="text-gray-300">Owner: {miner.address} </Text>
-                  {miner.mac && (
-                    <Text className="text-gray-300">MAC: {miner.mac}</Text>
-                  )}
-                  {miner.verified && (
-                    <Text className="text-gray-300">
-                      Position: {miner.position?.lat}, {miner.position?.lng}
-                    </Text>
-                  )}
-                  {miner.byod && (
-                    <Text className="text-gray-300">BYOD: {miner.byod}</Text>
-                  )}
+                  <Text className="text-gray-300">
+                    Verified: {miner.verified ? "Yes" : "No"}
+                  </Text>
 
                   {/* Add more miner information here */}
                 </div>
