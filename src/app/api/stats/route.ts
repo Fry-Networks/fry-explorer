@@ -7,6 +7,7 @@ export async function GET(request: Request) {
     const db = client.db("main")
     const collection = db.collection("devices")
     const miners = (await collection.find({}).toArray()) as unknown as Device[]
+    const registered = miners.filter((miner) => miner.is_registered).length
     const verified = miners.filter((miner) => miner.verified).length
     const located = miners.filter((miner) => miner.position).length
     const online = 150
@@ -14,6 +15,7 @@ export async function GET(request: Request) {
     return NextResponse.json({
       message: "ok",
       miners: miners.length,
+      registered: registered,
       located: located,
       verified: verified,
       online: online,

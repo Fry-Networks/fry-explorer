@@ -6,6 +6,7 @@ import { StatsList } from "./StatsList"
 export default function FryInfo() {
   const [data, setData] = useState({
     miners: 0,
+    registered: 0,
     located: 0,
     verified: 0,
     online: 0,
@@ -22,8 +23,9 @@ export default function FryInfo() {
           },
         }
       )
-      const { miners, located, verified, online } = await response.json()
-      setData({ miners, located, verified, online })
+      const { miners, registered, located, verified, online } =
+        await response.json()
+      setData({ miners, registered, located, verified, online })
     } catch (error) {
       console.error("Error fetching data:", error)
     }
@@ -42,6 +44,7 @@ export default function FryInfo() {
   return (
     <StatsList title="Fry" icon="fry">
       <StatItem label="Miners" value={data.miners ?? 0} />
+      <StatItem label="Registered Miners" value={data.registered ?? 0} />
       <StatItem label="Located Miners" value={data.located ?? 0} />
       <StatItem label="Verified Miners" value={data.verified ?? 0} />
       <StatItem label="Online Miners" value={"N/A"} />
