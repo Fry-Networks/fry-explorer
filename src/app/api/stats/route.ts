@@ -1,24 +1,58 @@
 import { NextResponse } from "next/server"
 import clientPromise from "../../../lib/mongoclient"
 
-export async function GET(request: Request) {
+let cachedData: {
+  miners: number
+  registered: number
+  located: number
+  verified: number
+  online: number
+} | null = null
+let lastUpdated = 0
+const UPDATE_INTERVAL = 600000 // 10 minutes in milliseconds
+
+async function updateCache() {
   try {
     const client = await clientPromise
     const db = client.db("main")
     const collection = db.collection("devices")
     const miners = (await collection.find({}).toArray()) as unknown as Device[]
+
     const registered = miners.filter((miner) => miner.is_registered).length
     const verified = miners.filter((miner) => miner.verified).length
     const located = miners.filter((miner) => miner.position).length
-    const online = 150
+    const online = 1 // Static for now
 
-    return NextResponse.json({
-      message: "ok",
+    cachedData = {
       miners: miners.length,
       registered: registered,
       located: located,
       verified: verified,
       online: online,
+    }
+
+    lastUpdated = Date.now()
+  } catch (error) {
+    console.error("Failed to update cache", error)
+  }
+}
+
+// Initialize the cache on server start
+updateCache()
+
+// Schedule cache updates
+setInterval(updateCache, UPDATE_INTERVAL)
+
+export async function GET(request: Request) {
+  try {
+    // If the cache is stale or not yet initialized, wait for an update
+    if (!cachedData || Date.now() - lastUpdated > UPDATE_INTERVAL) {
+      await updateCache()
+    }
+
+    return NextResponse.json({
+      message: "ok",
+      ...cachedData,
     })
   } catch (error) {
     console.log(error)
