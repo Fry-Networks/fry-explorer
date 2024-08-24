@@ -1,3 +1,4 @@
+"use server"
 import { NextResponse } from "next/server"
 import clientPromise from "../../../lib/mongoclient"
 
@@ -9,9 +10,9 @@ let cachedData: {
   online: number
 } | null = null
 let lastUpdated = 0
-const UPDATE_INTERVAL = 600000 // 10 minutes in milliseconds
-
+const UPDATE_INTERVAL = 600_000 // 10 minutes in milliseconds
 async function updateCache() {
+  console.log("Updating cache")
   try {
     const client = await clientPromise
     const db = client.db("main")
@@ -30,7 +31,8 @@ async function updateCache() {
       verified: verified,
       online: online,
     }
-
+    console.log("Cache updated")
+    console.log(cachedData)
     lastUpdated = Date.now()
   } catch (error) {
     console.error("Failed to update cache", error)
