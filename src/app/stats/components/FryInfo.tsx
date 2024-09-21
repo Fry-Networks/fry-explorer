@@ -34,6 +34,12 @@ export default function FryInfo() {
 
   useEffect(() => {
     fetchData() // Fetch data initially when component mounts
+
+    const interval = setInterval(() => {
+      fetchData() // Fetch new data every 10 minutes (600,000 ms)
+    }, 60_000) // 10 minutes
+
+    return () => clearInterval(interval)
   }, [])
 
   return (
