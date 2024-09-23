@@ -52,6 +52,8 @@ export async function GET(request: Request) {
       await updateCache()
     }
 
+    console.log("Cache updated before send")
+    console.log(cachedData)
     return NextResponse.json({
       message: "ok",
       ...cachedData,
