@@ -15,6 +15,7 @@ export default function FryInfo() {
 
   const fetchData = async () => {
     try {
+      console.log("update data")
       const response = await fetch(
         `${window.location.origin}/api/stats`, // Construct the URL dynamically
         {
