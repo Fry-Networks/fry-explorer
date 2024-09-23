@@ -13,11 +13,14 @@ export default function FryInfo() {
     loaded: false,
   })
 
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
   const fetchData = async () => {
     try {
-      console.log("update data", window.location.origin)
+      console.log("update data", window.location.origin, apiUrl)
       const response = await fetch(
-        `${window.location.origin}/api/stats?timestamp=${new Date().getTime()}`, // Cache-busting query param
+        `${
+          /*window.location.origin*/ apiUrl
+        }/api/stats?timestamp=${new Date().getTime()}`, // Cache-busting query param
         {
           method: "GET",
           headers: {
