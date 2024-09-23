@@ -15,7 +15,7 @@ export default function FryInfo() {
 
   const fetchData = async () => {
     try {
-      console.log("update data")
+      console.log("update data", window.location.origin)
       const response = await fetch(
         `${window.location.origin}/api/stats?timestamp=${new Date().getTime()}`, // Cache-busting query param
         {
