@@ -20,12 +20,12 @@ export const metadata = {
         sizes: "64x64 32x32 24x24 16x16",
       },
       {
-        url: "/logo192.png",
+        url: "/Logo.png",
         type: "image/png",
         sizes: "192x192",
       },
       {
-        url: "/logo512.png",
+        url: "/Logo.png",
         type: "image/png",
         sizes: "512x512",
       },
