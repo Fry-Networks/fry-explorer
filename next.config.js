@@ -1,5 +1,6 @@
 /** @type {import("next").NextConfig} */
 const nextConfig = {
+  output: "standalone",
   reactStrictMode: true,
   typescript: { ignoreBuildErrors: true }, // TODO: fix pre-existing TS errors (mapboxgl types, NavigationControl, implicit any)
   eslint: { ignoreDuringBuilds: true }, // TODO: fix ESLint warnings in FryInfo.tsx

@@ -3,7 +3,7 @@ FROM node:20-slim AS deps
 WORKDIR /app
 RUN npm install -g pnpm@8
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile --ignore-scripts
+RUN pnpm install --ignore-scripts
 
 # Stage 2: Build
 FROM node:20-slim AS builder
