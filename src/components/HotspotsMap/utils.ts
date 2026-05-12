@@ -1,3 +1,4 @@
+import type { FillPaint, CirclePaint, LinePaint, SymbolPaint, SymbolLayout } from "mapbox-gl"
 import { CoordPair } from "h3-js"
 import { HeliumIotIcon } from "../icons/HeliumIotIcon"
 
@@ -27,12 +28,12 @@ export const POINTS_AND_HEXES_OVERLAP = 2
 
 export const FRY_COLOR = "#dc2626"
 
-export const getHexFillStyle = (color: string): mapboxgl.FillPaint => ({
+export const getHexFillStyle = (color: string): FillPaint => ({
   "fill-color": color,
   "fill-opacity": 0.4,
 })
 
-export const getBlurredPointStyle = (color: string): mapboxgl.CirclePaint => ({
+export const getBlurredPointStyle = (color: string): CirclePaint => ({
   "circle-color": color,
   "circle-opacity": [
     "interpolate",
@@ -64,18 +65,18 @@ export const getBlurredPointStyle = (color: string): mapboxgl.CirclePaint => ({
 })
 export const getHexOutlineStyle = (
   theme: string | undefined
-): mapboxgl.LinePaint => ({
+): LinePaint => ({
   "line-color": theme === "dark" ? "#fff" : "rgb(113,113,122)",
   "line-width": 4,
 })
 
 export const getHexLabelStyle = (
   theme: string | undefined
-): mapboxgl.SymbolPaint => ({
+): SymbolPaint => ({
   "text-color": theme === "dark" ? "white" : "#6D6D6D",
 })
 
-export const hexLabelLayout: mapboxgl.SymbolLayout = {
+export const hexLabelLayout: SymbolLayout = {
   "text-font": ["NotoSans-Regular"],
   "text-field": ["get", "count"],
   "text-allow-overlap": false,

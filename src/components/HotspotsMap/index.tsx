@@ -117,7 +117,7 @@ export function HotspotsMap({ children }: { children: React.ReactNode }) {
 
   const onClick = useCallback(
     (event: MapLayerMouseEvent) => {
-      event.features?.forEach(({ layer, properties }) => {
+      event.features?.forEach(({ layer, properties }: { layer: { id: string }; properties: Record<string, string> | null }) => {
         console.log(layer, properties)
         if (layer.id !== "hexes_layer" || !properties?.id) return
         if (selectedHex?.hexId === properties.id) {
@@ -156,7 +156,7 @@ export function HotspotsMap({ children }: { children: React.ReactNode }) {
       ref={mapRef}
       attributionControl={false}
     >
-      <NavigationControl position="bottom-left" showCompass={false} />
+      <NavigationControl position="bottom-left" />
       {children}
 
       {segment !== "mobile" && <NetworkCoverageLayer />}

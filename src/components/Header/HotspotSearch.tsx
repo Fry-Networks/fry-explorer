@@ -44,17 +44,11 @@ export function HotspotSearch() {
     setIsLoading(true)
 
     try {
-      const searchUrl = new URL(
-        `${process.env.NEXT_PUBLIC_HOTSPOTTY_EXPLORER_API_URL}/search`
-      )
+      const searchUrl = new URL("/api/hotspot-search", window.location.origin)
       searchUrl.searchParams.append("name", query.trim().replaceAll(" ", "-"))
 
       const results = (await fetch(searchUrl, {
         signal,
-        next: { revalidate: 10 },
-        headers: {
-          Authorization: `bearer ${process.env.NEXT_PUBLIC_HOTSPOTTY_EXPLORER_API_TOKEN}`,
-        },
       }).then((res) => res.json())) as HotspotResult[]
 
       setSearchResults(results)
