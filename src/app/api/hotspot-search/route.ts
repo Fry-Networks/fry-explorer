@@ -1,45 +1,53 @@
 import { NextResponse } from "next/server"
+import clientPromise from "../../../lib/mongoclient"
 
-const HOTSPOTTY_API_URL =
-  process.env.HOTSPOTTY_EXPLORER_API_URL ||
-  "https://beta-api.hotspotty.net/api/v1/explorer"
+const RESULTS_LIMIT = 20
+
+function escapeRegex(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+}
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const name = searchParams.get("name")
 
-  if (!name) {
-    return NextResponse.json({ error: "Missing 'name' parameter" }, { status: 400 })
-  }
-
-  const token = process.env.HOTSPOTTY_EXPLORER_API_TOKEN
-  if (!token) {
+  if (!name || name.trim().length < 2) {
     return NextResponse.json(
-      { error: "Search unavailable — Hotspotty API token not configured" },
-      { status: 503 }
+      { error: "Query must be at least 2 characters" },
+      { status: 400 }
     )
   }
 
   try {
-    const searchUrl = new URL(`${HOTSPOTTY_API_URL}/search`)
-    searchUrl.searchParams.append("name", name.trim().replaceAll(" ", "-"))
+    const client = await clientPromise
+    const db = client.db("main")
+    const collection = db.collection("devices")
 
-    const response = await fetch(searchUrl.toString(), {
-      headers: {
-        Authorization: `bearer ${token}`,
-      },
-      next: { revalidate: 10 },
-    })
+    const searchTerm = escapeRegex(name.trim().replaceAll(" ", "-").toLowerCase())
 
-    if (!response.ok) {
-      return NextResponse.json(
-        { error: `Hotspotty API returned ${response.status}` },
-        { status: response.status }
-      )
-    }
+    const miners = await collection
+      .find({ name: { $regex: searchTerm, $options: "i" } })
+      .project({
+        _id: 0,
+        name: 1,
+        hexId: 1,
+        address: 1,
+        position: 1,
+        verified: 1,
+      })
+      .limit(RESULTS_LIMIT)
+      .toArray()
 
-    const data = await response.json()
-    return NextResponse.json(data)
+    const results = miners.map((miner: any) => ({
+      hotspot_id: miner.address || "",
+      location_res8: miner.hexId || "",
+      location_res12: miner.hexId || "",
+      name: miner.name || "",
+      owner: "",
+      cell_count: 0,
+    }))
+
+    return NextResponse.json(results)
   } catch (error) {
     console.error("Hotspot search error:", error)
     return NextResponse.json({ error: "Search failed" }, { status: 500 })

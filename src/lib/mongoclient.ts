@@ -18,12 +18,12 @@ if (!uri) {
   clientPromise.catch(() => {});
 } else if (process.env.NODE_ENV === "development") {
   if (!global._mongoClientPromise) {
-    const client = new MongoClient(uri, { keepAlive: true });
+    const client = new MongoClient(uri, {});
     global._mongoClientPromise = client.connect();
   }
   clientPromise = global._mongoClientPromise;
 } else {
-  const client = new MongoClient(uri, { keepAlive: true });
+  const client = new MongoClient(uri, {});
   clientPromise = client.connect();
 }
 
