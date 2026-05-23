@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.27.0",
+    "@protomaps/basemaps": "^5.7.2",
     "@headlessui/react": "1.7.13",
     "@headlessui/tailwindcss": "0.1.2",
     "@helium/account-fetch-cache": "^0.2.5",

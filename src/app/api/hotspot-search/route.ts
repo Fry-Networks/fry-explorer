@@ -23,7 +23,7 @@ export async function GET(request: Request) {
     const db = client.db("main")
     const collection = db.collection("devices")
 
-    const searchTerm = escapeRegex(name.trim().replaceAll(" ", "-").toLowerCase())
+    const searchTerm = escapeRegex(name.trim().toLowerCase())
 
     const miners = await collection
       .find({ name: { $regex: searchTerm, $options: "i" } })
@@ -43,8 +43,6 @@ export async function GET(request: Request) {
       location_res8: miner.hexId || "",
       location_res12: miner.hexId || "",
       name: miner.name || "",
-      owner: "",
-      cell_count: 0,
     }))
 
     return NextResponse.json(results)

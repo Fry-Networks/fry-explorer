@@ -22,10 +22,8 @@ import Map, {
   Source,
 } from "react-map-gl"
 import { gaEvent } from "../GATracker"
+import { layers as protomapsLayers, LIGHT, DARK } from "@protomaps/basemaps"
 import { NetworkCoverageLayer } from "./NetworkCoverageLayer"
-import { mapLayersDark } from "./mapLayersDark"
-import { mapLayersDarkSimon } from "./mapLayersDarkSimon"
-import { mapLayersLight } from "./mapLayersLight"
 import {
   HexFeatureDetails,
   INITIAL_MAP_VIEW_STATE,
@@ -60,11 +58,13 @@ export function HotspotsMap({ children }: { children: React.ReactNode }) {
       sources: {
         protomaps: {
           type: "vector",
-          tiles: [`${process.env.NEXT_PUBLIC_PMTILES_URL}/{z}/{x}/{y}.pbf`],
+          url: `pmtiles://${process.env.NEXT_PUBLIC_PMTILES_URL}`,
         },
       },
       glyphs: "https://cdn.protomaps.com/fonts/pbf/{fontstack}/{range}.pbf",
-      layers: resolvedTheme === "dark" ? mapLayersDark : mapLayersLight,
+      layers: protomapsLayers("protomaps", resolvedTheme === "dark" ? DARK : LIGHT, { lang: "en" }).map(layer =>
+        JSON.parse(JSON.stringify(layer).replaceAll("pmap:", ""))
+      ) as any,
     }
     return style
   }, [resolvedTheme])
