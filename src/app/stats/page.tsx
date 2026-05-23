@@ -1,5 +1,4 @@
 import { MapCover } from "@/components/MapCover"
-import { StatItem } from "@/app/stats/components/StatItem"
 import { StatsList } from "./components/StatsList"
 import FryInfo from "./components/FryInfo"
 export default async function Page() {

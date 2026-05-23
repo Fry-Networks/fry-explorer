@@ -12,6 +12,14 @@ RUN npm install -g pnpm@8
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 # Build does NOT require MONGO_URI or any secrets
+
+
+ARG NEXT_PUBLIC_TILES_URL=https://tiles.frynetworks.com
+ARG NEXT_PUBLIC_API_URL=https://explorer.frynetworks.com
+ARG NEXT_PUBLIC_PMTILES_URL=https://tiles.frynetworks.com/basemap/planet.pmtiles
+ENV NEXT_PUBLIC_TILES_URL=$NEXT_PUBLIC_TILES_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_PMTILES_URL=$NEXT_PUBLIC_PMTILES_URL
 RUN pnpm build
 
 # Stage 3: Production

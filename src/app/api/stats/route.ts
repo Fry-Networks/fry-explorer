@@ -1,4 +1,3 @@
-"use server"
 import { NextResponse } from "next/server"
 import clientPromise from "../../../lib/mongoclient"
 
@@ -17,19 +16,19 @@ async function updateCache() {
     const client = await clientPromise
     const db = client.db("main")
     const collection = db.collection("devices")
-    const miners = (await collection.find({}).toArray()) as unknown as Device[]
-
-    const registered = miners.filter((miner) => miner.is_registered).length
-    const verified = miners.filter((miner) => miner.verified).length
-    const located = miners.filter((miner) => miner.position).length
-    const online = 1 // Static for now
+    const [total, registered, verified, located] = await Promise.all([
+      collection.countDocuments({}),
+      collection.countDocuments({ is_registered: true }),
+      collection.countDocuments({ verified: true }),
+      collection.countDocuments({ position: { $exists: true } }),
+    ])
 
     cachedData = {
-      miners: miners.length,
-      registered: registered,
-      located: located,
-      verified: verified,
-      online: online,
+      miners: total,
+      registered,
+      located,
+      verified,
+      online: total, // Placeholder: no online field in schema
     }
     console.log("Cache updated")
     console.log(cachedData)
@@ -54,12 +53,15 @@ export async function GET(request: Request) {
 
     console.log("Cache updated before send")
     console.log(cachedData)
+    if (!cachedData) {
+      return NextResponse.json({ message: "Stats temporarily unavailable — database connection failed" }, { status: 503 })
+    }
     return NextResponse.json({
       message: "ok",
       ...cachedData,
     })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     return NextResponse.json({ message: "error" }, { status: 500 })
   }
 }

@@ -1,5 +1,4 @@
 "use client"
-import "dotenv/config"
 import { Dialog, DialogPanel, Flex, Text, Title } from "@tremor/react"
 import { useEffect, useState } from "react"
 import { XMarkIcon } from "@heroicons/react/24/solid"
@@ -8,14 +7,6 @@ export function HexHotspotsClient({ miners }: { miners: Miner[] | null }) {
   const [openModal, setOpenModal] = useState<string | null>(null)
 
   if (!miners || miners.length === 0) {
-    return (
-      <div className="mb-2 text-sm font-medium text-gray-900 dark:text-zinc-200">
-        This hex contains no miners.
-      </div>
-    )
-  }
-
-  if (miners.length === 0) {
     return (
       <div className="mb-2 text-sm font-medium text-gray-900 dark:text-zinc-200">
         This hex contains no miners.
