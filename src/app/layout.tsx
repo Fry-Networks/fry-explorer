@@ -10,6 +10,7 @@ import { Suspense } from "react"
 import "react-tooltip/dist/react-tooltip.css"
 
 export const metadata = {
+  metadataBase: new URL("https://explorer.frynetworks.com"),
   manifest: "/manifest.json",
   themeColor: "#000000",
   icons: {

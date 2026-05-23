@@ -4,6 +4,9 @@ import clientPromise from "../../../lib/mongoclient"
 export async function POST(request: Request) {
   const data = await request.json()
   const { hexId } = data
+  if (!hexId || typeof hexId !== "string" || hexId.trim().length === 0) {
+    return NextResponse.json({ message: "Invalid hexId" }, { status: 400 })
+  }
 
   try {
     const client = await clientPromise
@@ -23,7 +26,7 @@ export async function POST(request: Request) {
     })
     return NextResponse.json({ message: "ok", miners: clean })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     return NextResponse.json({ message: "error" }, { status: 500 })
   }
 }

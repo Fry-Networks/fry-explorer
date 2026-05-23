@@ -39,11 +39,9 @@ export function Header() {
             <DesktopNavigation className="pointer-events-auto hidden md:block" />
           </div>
           <div className="flex justify-end gap-4 md:flex-1">
-            {/*
             <div className="pointer-events-auto">
               <HotspotSearch />
             </div>
-*/}
             <div className="pointer-events-auto py-2 sm:block">
               <Link
                 href="/preferences"

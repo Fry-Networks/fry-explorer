@@ -39,23 +39,21 @@ export function HotspotSearch() {
 
     setSearchResults([])
 
-    if (!query) return null
+    if (!query || query.trim().length < 2) return null
 
     setIsLoading(true)
 
     try {
-      const searchUrl = new URL(
-        `${process.env.NEXT_PUBLIC_HOTSPOTTY_EXPLORER_API_URL}/search`
-      )
-      searchUrl.searchParams.append("name", query.trim().replaceAll(" ", "-"))
+      const searchUrl = new URL("/api/hotspot-search", window.location.origin)
+      searchUrl.searchParams.append("name", query.trim())
 
-      const results = (await fetch(searchUrl, {
-        signal,
-        next: { revalidate: 10 },
-        headers: {
-          Authorization: `bearer ${process.env.NEXT_PUBLIC_HOTSPOTTY_EXPLORER_API_TOKEN}`,
-        },
-      }).then((res) => res.json())) as HotspotResult[]
+      const res = await fetch(searchUrl, { signal })
+      if (!res.ok) {
+        setSearchResults([])
+        setIsLoading(false)
+        return
+      }
+      const results = (await res.json()) as HotspotResult[]
 
       setSearchResults(results)
       setIsLoading(false)
@@ -206,7 +204,9 @@ export function HotspotSearch() {
                         aria-hidden="true"
                       />
                       <p className="mt-4 text-sm text-gray-900 dark:text-gray-200">
-                        We couldn&#39;t find matching Hotspots...
+                        {query.trim().length < 2
+                          ? "Enter at least 2 characters to search"
+                          : "We couldn't find matching Hotspots..."}
                       </p>
                     </div>
                   )}

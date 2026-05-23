@@ -13,14 +13,11 @@ export default function FryInfo() {
     loaded: false,
   })
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL
   const fetchData = async () => {
     try {
-      console.log("update data", window.location.origin, apiUrl)
+      console.log("update data", window.location.origin)
       const response = await fetch(
-        `${
-          /*window.location.origin*/ apiUrl
-        }/api/stats?timestamp=${new Date().getTime()}`, // Cache-busting query param
+        `/api/stats?timestamp=${new Date().getTime()}`, // Cache-busting query param
         {
           method: "GET",
           headers: {
@@ -41,7 +38,7 @@ export default function FryInfo() {
 
     const interval = setInterval(() => {
       fetchData() // Fetch new data every 10 minutes (600,000 ms)
-    }, 60_000) // 10 minutes
+    }, 600_000) // 10 minutes
 
     return () => clearInterval(interval)
   }, [])

@@ -14,7 +14,6 @@ import {
 
 export function NetworkCoverageLayer({ ...props }: {}) {
   const { resolvedTheme } = useTheme()
-  const port = 3018
   return (
     <Fragment {...props}>
       {/* new url: http://localhost:8080/data/miners/{z}/{x}/{y}.pbf */}
