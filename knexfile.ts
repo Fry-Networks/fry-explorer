@@ -14,7 +14,10 @@ const PG_CONFIG_PROD: Knex.Config = {
   connection: {
     connectionString: process.env.DATABASE_URL,
     ssl: {
-      rejectUnauthorized: false,
+      // Verify the server certificate by default. Only a managed Postgres
+      // provider whose cert chain genuinely isn't verifiable (and that you've
+      // otherwise confirmed is trustworthy) should need to opt out of this.
+      rejectUnauthorized: process.env.DATABASE_SSL_INSECURE !== "true",
     },
   },
   migrations: {
